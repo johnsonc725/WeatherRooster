@@ -1,0 +1,114 @@
+.search-container {
+  margin-bottom: 30px;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+}
+
+.search-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.search-button {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.search-button:active {
+  transform: translateY(0);
+}
+
+.quick-cities {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.quick-cities p {
+  margin-bottom: 15px;
+  font-size: 1rem;
+  opacity: 0.9;
+  color: white;
+}
+
+.city-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.city-button {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.city-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.city-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .search-input,
+  .search-button {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+  
+  .city-buttons {
+    gap: 8px;
+  }
+  
+  .city-button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

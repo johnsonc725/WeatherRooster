@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.main-content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px;
+  }
+}
