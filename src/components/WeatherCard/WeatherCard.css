@@ -308,9 +308,9 @@
 }
 
 .hourly-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px;
 }
 
@@ -318,41 +318,83 @@
   background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 15px;
-  text-align: center;
+  text-align: left;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .hourly-item:hover {
   transform: translateY(-3px);
 }
 
+/* Current hour highlighting */
+.hourly-item.current-hour {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.3), rgba(0, 242, 254, 0.3));
+  border: 2px solid #4facfe;
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.4);
+  transform: scale(1.02);
+}
+
+.hourly-item.current-hour .hourly-time,
+.hourly-item.current-hour .hourly-temp {
+  color: white;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hourly-item.current-hour .hourly-icon {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.hourly-item.current-hour .hourly-details {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Past hours de-emphasis */
+.hourly-item.past-hour {
+  opacity: 0.4;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.hourly-item.past-hour .hourly-time,
+.hourly-item.past-hour .hourly-temp,
+.hourly-item.past-hour .hourly-details {
+  opacity: 0.6;
+}
+
 .hourly-time {
   font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 8px;
   color: white;
+  min-width: 50px;
 }
 
 .hourly-icon {
   font-size: 2rem;
-  margin-bottom: 10px;
   filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+  min-width: 40px;
+  text-align: center;
 }
 
 .hourly-temp {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 10px;
   color: white;
+  min-width: 60px;
 }
 
 .hourly-details {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  gap: 20px;
   font-size: 0.8rem;
   opacity: 0.9;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .hourly-wind,
@@ -393,9 +435,7 @@
     grid-template-columns: 1fr;
   }
   
-  .hourly-items {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
+
   
   .hourly-item {
     padding: 12px;

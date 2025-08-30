@@ -84,17 +84,31 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data, station, allStations })
         <div className="hourly-forecast">
           <h3>24-Hour Forecast</h3>
           <div className="hourly-items">
-            {data.hourly.map((hour, index) => (
-              <div key={index} className="hourly-item">
-                <div className="hourly-time">{hour.time}</div>
-                <div className="hourly-icon">{hour.icon}</div>
-                <div className="hourly-temp">{hour.temperature}°F</div>
-                <div className="hourly-details">
-                  <div className="hourly-wind">💨 {hour.windSpeed} km/h</div>
-                  <div className="hourly-precipitation">🌧️ {hour.precipitationProbability}%</div>
+            {data.hourly.map((hour, index) => {
+              const now = new Date();
+              const currentHour = now.getHours();
+              const hourNumber = parseInt(hour.time.split(' ')[0]);
+              const isPM = hour.time.includes('PM');
+              const hour24 = isPM && hourNumber !== 12 ? hourNumber + 12 : hourNumber === 12 && !isPM ? 0 : hourNumber;
+              
+              const isCurrentHour = hour24 === currentHour;
+              const isPastHour = hour24 < currentHour;
+              
+              return (
+                <div 
+                  key={index} 
+                  className={`hourly-item ${isCurrentHour ? 'current-hour' : ''} ${isPastHour ? 'past-hour' : ''}`}
+                >
+                  <div className="hourly-time">{hour.time}</div>
+                  <div className="hourly-icon">{hour.icon}</div>
+                  <div className="hourly-temp">{hour.temperature}°F</div>
+                  <div className="hourly-details">
+                    <div className="hourly-wind">💨 {hour.windSpeed} km/h</div>
+                    <div className="hourly-precipitation">🌧️ {hour.precipitationProbability}%</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

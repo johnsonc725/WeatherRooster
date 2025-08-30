@@ -190,7 +190,200 @@ const WeatherDashboard: React.FC = () => {
                   icon: "☀️"
                 }
               ],
-              hourly: []
+              hourly: [
+                {
+                  time: "1 PM",
+                  temperature: 67,
+                  windSpeed: 10,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 15
+                },
+                {
+                  time: "2 PM",
+                  temperature: 68,
+                  windSpeed: 12,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 10
+                },
+                {
+                  time: "3 PM",
+                  temperature: 69,
+                  windSpeed: 14,
+                  condition: "Sunny",
+                  icon: "☀️",
+                  precipitationProbability: 5
+                },
+                {
+                  time: "4 PM",
+                  temperature: 70,
+                  windSpeed: 15,
+                  condition: "Sunny",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "5 PM",
+                  temperature: 69,
+                  windSpeed: 13,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "6 PM",
+                  temperature: 67,
+                  windSpeed: 11,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "7 PM",
+                  temperature: 65,
+                  windSpeed: 9,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "8 PM",
+                  temperature: 63,
+                  windSpeed: 8,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "9 PM",
+                  temperature: 61,
+                  windSpeed: 7,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "10 PM",
+                  temperature: 59,
+                  windSpeed: 6,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "11 PM",
+                  temperature: 57,
+                  windSpeed: 5,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "12 AM",
+                  temperature: 56,
+                  windSpeed: 4,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "1 AM",
+                  temperature: 55,
+                  windSpeed: 3,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "2 AM",
+                  temperature: 54,
+                  windSpeed: 3,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "3 AM",
+                  temperature: 53,
+                  windSpeed: 2,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "4 AM",
+                  temperature: 52,
+                  windSpeed: 2,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "5 AM",
+                  temperature: 51,
+                  windSpeed: 1,
+                  condition: "Clear Sky",
+                  icon: "☀️",
+                  precipitationProbability: 0
+                },
+                {
+                  time: "6 AM",
+                  temperature: 52,
+                  windSpeed: 2,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 5
+                },
+                {
+                  time: "7 AM",
+                  temperature: 54,
+                  windSpeed: 3,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 10
+                },
+                {
+                  time: "8 AM",
+                  temperature: 56,
+                  windSpeed: 4,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 15
+                },
+                {
+                  time: "9 AM",
+                  temperature: 58,
+                  windSpeed: 5,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 20
+                },
+                {
+                  time: "10 AM",
+                  temperature: 60,
+                  windSpeed: 6,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 25
+                },
+                {
+                  time: "11 AM",
+                  temperature: 62,
+                  windSpeed: 7,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 30
+                },
+                {
+                  time: "12 PM",
+                  temperature: 64,
+                  windSpeed: 8,
+                  condition: "Partly Cloudy",
+                  icon: "⛅",
+                  precipitationProbability: 25
+                }
+              ]
             }}
             station={null}
             allStations={[]}
