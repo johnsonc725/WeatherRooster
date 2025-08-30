@@ -13,6 +13,8 @@ A beautiful and modern weather application built with React and TypeScript. Get 
 - ⚡ **Fast Performance**: Built with React 18 and optimized for speed
 - 🚀 **Quick Cities**: One-click access to popular cities
 - 🔑 **No API Key Required**: Open-Meteo is completely free!
+- 📍 **Weather Station Pinpointing**: Get weather data for exact coordinates
+- 🌡️ **Fahrenheit Temperatures**: All temperatures displayed in °F
 
 ## 🛠️ Tech Stack
 
@@ -21,6 +23,7 @@ A beautiful and modern weather application built with React and TypeScript. Get 
 - **Build Tool**: Create React App
 - **Package Manager**: npm
 - **Weather API**: Open-Meteo (completely free, no rate limits!)
+- **Deployment**: GitHub Pages with GitHub Actions
 
 ## 🚀 Getting Started
 
@@ -52,6 +55,48 @@ A beautiful and modern weather application built with React and TypeScript. Get 
 
 **That's it!** No API keys, no configuration needed. Open-Meteo provides free weather data instantly.
 
+## 🚀 Deployment to GitHub Pages
+
+### Automatic Deployment (Recommended)
+
+This app is configured for automatic deployment to GitHub Pages using GitHub Actions. Every push to the `main` branch will automatically build and deploy your app.
+
+1. **Push your code to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. **Enable GitHub Pages:**
+   - Go to your repository on GitHub
+   - Click **Settings** → **Pages**
+   - Under **Source**, select **Deploy from a branch**
+   - Choose **gh-pages** branch and **/(root)** folder
+   - Click **Save**
+
+3. **Your app will be live at:** `https://yourusername.github.io/WeatherRooster`
+
+### Manual Deployment
+
+If you prefer manual deployment:
+
+1. **Install gh-pages:**
+   ```bash
+   npm install --save-dev gh-pages
+   ```
+
+2. **Deploy:**
+   ```bash
+   npm run deploy
+   ```
+
+### Deployment Scripts
+
+- `npm run build` - Creates production build
+- `npm run deploy` - Deploys to GitHub Pages
+- `npm run predeploy` - Automatically runs build before deployment
+
 ## 🔑 API Features
 
 Open-Meteo provides:
@@ -70,7 +115,9 @@ src/
 │   ├── Header/         # App header component
 │   ├── SearchBar/      # Location search component
 │   ├── WeatherCard/    # Weather display component
-│   └── WeatherDashboard/ # Main dashboard component
+│   ├── WeatherDashboard/ # Main dashboard component
+│   ├── CoordinateSearch/ # Coordinate-based search
+│   └── WeatherStations/ # Nearby weather stations
 ├── services/           # API services
 │   └── weatherApi.ts  # Open-Meteo API integration
 ├── types/              # TypeScript type definitions
@@ -86,6 +133,8 @@ src/
 - **WeatherDashboard**: Main container managing weather state and API calls
 - **SearchBar**: Location input, search functionality, and quick city buttons
 - **WeatherCard**: Displays current weather and forecast data
+- **CoordinateSearch**: Precise coordinate-based weather searches
+- **WeatherStations**: Nearby weather monitoring points
 - **weatherApi**: Handles all Open-Meteo API communication
 
 ## 🌟 Features Implemented
@@ -97,6 +146,9 @@ src/
 - ✅ **Loading States**: Smooth loading animations during API calls
 - ✅ **Responsive Design**: Mobile-first approach with touch-friendly interface
 - ✅ **WMO Weather Codes**: Professional weather condition mapping
+- ✅ **Weather Station Pinpointing**: Get weather for exact coordinates
+- ✅ **Fahrenheit Temperatures**: All temperatures in °F
+- ✅ **GitHub Pages Ready**: Configured for easy deployment
 
 ## 🚀 Available Scripts
 
@@ -104,6 +156,7 @@ src/
 - `npm build` - Builds the app for production
 - `npm test` - Launches the test runner
 - `npm eject` - Ejects from Create React App (one-way operation)
+- `npm run deploy` - Deploys to GitHub Pages
 
 ## 🔮 Future Enhancements
 
@@ -134,6 +187,11 @@ src/
    - Ensure all dependencies are installed (`npm install`)
    - Check browser console for error messages
    - Verify the development server is running (`npm start`)
+
+4. **Deployment issues:**
+   - Ensure you have write access to the repository
+   - Check GitHub Actions tab for build errors
+   - Verify GitHub Pages is enabled in repository settings
 
 ## 🤝 Contributing
 
@@ -167,3 +225,11 @@ If you encounter any issues or have questions:
 **Happy Weather Forecasting! 🌤️🐓**
 
 *Powered by Open-Meteo - The Free Weather API*
+
+---
+
+## 🚀 Live Demo
+
+**View the live app:** [Weather Rooster on GitHub Pages](https://johnsonchen.github.io/WeatherRooster)
+
+*Note: Replace `johnsonchen` with your actual GitHub username in the URL above.*
