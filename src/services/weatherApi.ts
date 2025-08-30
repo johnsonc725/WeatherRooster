@@ -26,6 +26,18 @@ export interface OpenMeteoForecastResponse {
     temperature_2m_max: string;
     temperature_2m_min: string;
   };
+  hourly: {
+    time: string[];
+    temperature_2m: number[];
+    wind_speed_10m: number[];
+    weather_code: number[];
+    precipitation_probability: number[];
+  };
+  hourly_units: {
+    temperature_2m: string;
+    wind_speed_10m: string;
+    precipitation_probability: string;
+  };
 }
 
 export interface GeocodingResponse {
@@ -132,7 +144,7 @@ export const getWeatherByCoordinates = async (latitude: number, longitude: numbe
 // Get forecast data by coordinates
 export const getForecastByCoordinates = async (latitude: number, longitude: number): Promise<OpenMeteoForecastResponse> => {
   const response = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,wind_speed_10m,weather_code,precipitation_probability&timezone=auto`
   );
   
   if (!response.ok) {
@@ -162,7 +174,7 @@ export const getForecast = async (city: string): Promise<OpenMeteoForecastRespon
   const coords = await getCoordinates(city);
   
   const response = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${coords.latitude}&longitude=${coords.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`
+    `https://api.open-meteo.com/v1/forecast?latitude=${coords.latitude}&longitude=${coords.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,wind_speed_10m,weather_code,precipitation_probability&timezone=auto`
   );
   
   if (!response.ok) {
@@ -206,6 +218,27 @@ export const transformWeatherData = (
 ) => {
   const currentWeather = getWeatherInfo(current.current.weather_code);
   
+  // Get next 24 hours of hourly data
+  const now = new Date();
+  const hourlyData = forecast.hourly?.time
+    ?.map((timeStr, index) => {
+      const time = new Date(timeStr);
+      if (time > now && time <= new Date(now.getTime() + 24 * 60 * 60 * 1000)) {
+        const weatherInfo = getWeatherInfo(forecast.hourly.weather_code[index]);
+        return {
+          time: time.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true }),
+          temperature: Math.round(celsiusToFahrenheit(forecast.hourly.temperature_2m[index])),
+          windSpeed: Math.round(forecast.hourly.wind_speed_10m[index]),
+          condition: weatherInfo.condition,
+          icon: weatherInfo.icon,
+          precipitationProbability: forecast.hourly.precipitation_probability[index] || 0
+        };
+      }
+      return null;
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null)
+    .slice(0, 24) || []; // Limit to 24 hours, default to empty array
+  
   return {
     location: city,
     current: {
@@ -227,7 +260,8 @@ export const transformWeatherData = (
         condition: weatherInfo.condition,
         icon: weatherInfo.icon
       };
-    })
+    }),
+    hourly: hourlyData
   };
 };
 
@@ -239,6 +273,27 @@ export const transformCoordinateWeatherData = (
   forecast: OpenMeteoForecastResponse
 ) => {
   const currentWeather = getWeatherInfo(current.current.weather_code);
+  
+  // Get next 24 hours of hourly data
+  const now = new Date();
+  const hourlyData = forecast.hourly?.time
+    ?.map((timeStr, index) => {
+      const time = new Date(timeStr);
+      if (time > now && time <= new Date(now.getTime() + 24 * 60 * 60 * 1000)) {
+        const weatherInfo = getWeatherInfo(forecast.hourly.weather_code[index]);
+        return {
+          time: time.toLocaleTimeString('en-US', { hour: 'numeric', hour12: true }),
+          temperature: Math.round(celsiusToFahrenheit(forecast.hourly.temperature_2m[index])),
+          windSpeed: Math.round(forecast.hourly.wind_speed_10m[index]),
+          condition: weatherInfo.condition,
+          icon: weatherInfo.icon,
+          precipitationProbability: forecast.hourly.precipitation_probability[index] || 0
+        };
+      }
+      return null;
+    })
+    .filter((item): item is NonNullable<typeof item> => item !== null)
+    .slice(0, 24) || []; // Limit to 24 hours, default to empty array
   
   return {
     location: `📍 ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`,
@@ -261,6 +316,7 @@ export const transformCoordinateWeatherData = (
         condition: weatherInfo.condition,
         icon: weatherInfo.icon
       };
-    })
+    }),
+    hourly: hourlyData
   };
 };

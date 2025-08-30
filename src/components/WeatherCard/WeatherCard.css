@@ -137,6 +137,76 @@
   opacity: 0.9;
 }
 
+/* Hourly Forecast Styles */
+.hourly-forecast {
+  margin-top: 40px;
+}
+
+.hourly-forecast h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.hourly-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.hourly-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.hourly-item:hover {
+  transform: translateY(-3px);
+}
+
+.hourly-time {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: white;
+}
+
+.hourly-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.hourly-temp {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.hourly-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.hourly-wind,
+.hourly-precipitation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 @media (max-width: 768px) {
   .weather-card {
     padding: 20px;
@@ -165,5 +235,18 @@
   
   .forecast-items {
     grid-template-columns: 1fr;
+  }
+  
+  .hourly-items {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    max-height: 300px;
+  }
+  
+  .hourly-item {
+    padding: 12px;
+  }
+  
+  .hourly-icon {
+    font-size: 1.5rem;
   }
 }

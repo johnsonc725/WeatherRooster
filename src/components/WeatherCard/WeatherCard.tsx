@@ -48,6 +48,25 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
           ))}
         </div>
       </div>
+      
+      {data.hourly && data.hourly.length > 0 && (
+        <div className="hourly-forecast">
+          <h3>24-Hour Forecast</h3>
+          <div className="hourly-items">
+            {data.hourly.map((hour, index) => (
+              <div key={index} className="hourly-item">
+                <div className="hourly-time">{hour.time}</div>
+                <div className="hourly-icon">{hour.icon}</div>
+                <div className="hourly-temp">{hour.temperature}°F</div>
+                <div className="hourly-details">
+                  <div className="hourly-wind">💨 {hour.windSpeed} km/h</div>
+                  <div className="hourly-precipitation">🌧️ {hour.precipitationProbability}%</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

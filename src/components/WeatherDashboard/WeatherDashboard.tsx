@@ -147,6 +147,7 @@ const WeatherDashboard: React.FC = () => {
               <div className="city-tags">
                 <span className="city-tag">London</span>
                 <span className="city-tag">New York</span>
+                <span className="city-tag">San Francisco</span>
                 <span className="city-tag">Tokyo</span>
                 <span className="city-tag">Paris</span>
                 <span className="city-tag">Sydney</span>
