@@ -21,6 +21,16 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.logo.clickable {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo.clickable:hover {
+  transform: scale(1.05);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
 .tagline {
   font-size: 1.2rem;
   opacity: 0.9;

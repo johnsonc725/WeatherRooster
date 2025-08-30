@@ -1,12 +1,14 @@
 import React from 'react';
 import './WeatherCard.css';
-import { WeatherData } from '../../types/weather';
+import { WeatherData, WeatherStation } from '../../types/weather';
 
 interface WeatherCardProps {
   data: WeatherData;
+  station?: WeatherStation | null;
+  allStations?: WeatherStation[];
 }
 
-const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
+const WeatherCard: React.FC<WeatherCardProps> = ({ data, station, allStations }) => {
   return (
     <div className="weather-card">
       <div className="current-weather">
@@ -30,6 +32,35 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
             <span className="stat-value">{data.current.windSpeed} km/h</span>
           </div>
         </div>
+        
+        {station && (
+          <div className="weather-station-info">
+            <div className="station-header">
+              <span className="station-icon">🏭</span>
+              <span className="station-name">{station.name}</span>
+            </div>
+            <div className="station-details">
+              <div className="station-coordinate">
+                <span className="coordinate-label">Lat:</span>
+                <span className="coordinate-value">{station.latitude.toFixed(4)}</span>
+              </div>
+              <div className="station-coordinate">
+                <span className="coordinate-label">Lon:</span>
+                <span className="coordinate-value">{station.longitude.toFixed(4)}</span>
+              </div>
+              <div className="station-distance">
+                <span className="distance-label">Distance:</span>
+                <span className="distance-value">{station.distance} km</span>
+              </div>
+              {station.elevation && (
+                <div className="station-elevation">
+                  <span className="elevation-label">Elevation:</span>
+                  <span className="elevation-value">{station.elevation}m</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
       
       <div className="forecast">
@@ -67,6 +98,44 @@ const WeatherCard: React.FC<WeatherCardProps> = ({ data }) => {
           </div>
         </div>
       )}
+      
+      {allStations && allStations.length > 0 && (
+        <div className="all-stations-section">
+          <h3>🏭 All Available Weather Stations ({allStations.length})</h3>
+          <div className="all-stations-grid">
+            {allStations.map((station, index) => (
+              <div key={station.id} className="station-card-compact">
+                <div className="station-card-header">
+                  <span className="station-name-compact">{station.name}</span>
+                  <span className="station-distance-compact">{station.distance} km</span>
+                </div>
+                <div className="station-card-coordinates">
+                  <div className="coordinate-compact">
+                    <span className="coord-label">Lat:</span>
+                    <span className="coord-value">{station.latitude.toFixed(4)}</span>
+                  </div>
+                  <div className="coordinate-compact">
+                    <span className="coord-label">Lon:</span>
+                    <span className="coord-value">{station.longitude.toFixed(4)}</span>
+                  </div>
+                </div>
+                {station.elevation && (
+                  <div className="station-elevation-compact">
+                    <span className="elevation-label">Elevation:</span>
+                    <span className="elevation-value">{station.elevation}m</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Debug info */}
+      <div style={{marginTop: '20px', padding: '10px', background: 'rgba(255,255,255,0.1)', borderRadius: '8px', fontSize: '12px'}}>
+        <p>Debug: allStations = {allStations ? `${allStations.length} stations` : 'undefined'}</p>
+        <p>Debug: stations array = {JSON.stringify(allStations?.slice(0, 2))}</p>
+      </div>
     </div>
   );
 };

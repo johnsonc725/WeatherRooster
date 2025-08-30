@@ -21,11 +21,13 @@ const WeatherDashboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [stations, setStations] = useState<WeatherStation[]>([]);
   const [searchMode, setSearchMode] = useState<'city' | 'coordinates'>('city');
+  const [currentStation, setCurrentStation] = useState<WeatherStation | null>(null);
 
   const handleCitySearch = async (location: string) => {
     setLoading(true);
     setError(null);
     setStations([]);
+    setCurrentStation(null);
     
     try {
       // Fetch both current weather and forecast
@@ -49,6 +51,7 @@ const WeatherDashboard: React.FC = () => {
     setLoading(true);
     setError(null);
     setStations([]);
+    setCurrentStation(null);
     
     try {
       // Fetch both current weather and forecast by coordinates
@@ -60,6 +63,16 @@ const WeatherDashboard: React.FC = () => {
       // Transform the coordinate data to our app's format
       const transformedData = transformCoordinateWeatherData(latitude, longitude, currentWeather, forecast);
       setWeatherData(transformedData);
+      
+      // Automatically fetch nearby stations
+      try {
+        const nearbyStations = await getNearbyStations(latitude, longitude);
+        console.log('Fetched stations:', nearbyStations);
+        setStations(nearbyStations);
+      } catch (stationErr) {
+        console.warn('Failed to fetch nearby stations:', stationErr);
+        // Don't set error for station fetch failure, just log it
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch weather data for coordinates');
       setWeatherData(null);
@@ -78,6 +91,13 @@ const WeatherDashboard: React.FC = () => {
   };
 
   const handleStationSelect = (latitude: number, longitude: number) => {
+    // Find the selected station
+    const selectedStation = stations.find(station => 
+      station.latitude === latitude && station.longitude === longitude
+    );
+    if (selectedStation) {
+      setCurrentStation(selectedStation);
+    }
     handleCoordinateSearch(latitude, longitude);
   };
 
@@ -124,7 +144,7 @@ const WeatherDashboard: React.FC = () => {
       
       {weatherData && !loading && !error && (
         <div className="weather-content">
-          <WeatherCard data={weatherData} />
+          <WeatherCard data={weatherData} station={currentStation} allStations={stations} />
         </div>
       )}
       
@@ -136,39 +156,45 @@ const WeatherDashboard: React.FC = () => {
       )}
       
       {!weatherData && !loading && !error && (
-        <div className="welcome-message">
-          <h2>Welcome to Weather Rooster! 🐓</h2>
-          <p>Choose your search method to get started with weather forecasting.</p>
-          <p className="temp-unit-note">🌡️ All temperatures are displayed in Fahrenheit (°F)</p>
-          
-          {searchMode === 'city' ? (
-            <div className="example-cities">
-              <p>Try searching for:</p>
-              <div className="city-tags">
-                <span className="city-tag">London</span>
-                <span className="city-tag">New York</span>
-                <span className="city-tag">San Francisco</span>
-                <span className="city-tag">Tokyo</span>
-                <span className="city-tag">Paris</span>
-                <span className="city-tag">Sydney</span>
-              </div>
-            </div>
-          ) : (
-            <div className="coordinate-examples">
-              <p>Try these coordinates:</p>
-              <div className="coordinate-examples-grid">
-                <div className="coord-example">
-                  <strong>London:</strong> 51.5074, -0.1278
-                </div>
-                <div className="coord-example">
-                  <strong>New York:</strong> 40.7128, -74.0060
-                </div>
-                <div className="coord-example">
-                  <strong>Tokyo:</strong> 35.6762, 139.6503
-                </div>
-              </div>
-            </div>
-          )}
+        <div className="default-weather">
+          <WeatherCard 
+            data={{
+              location: "San Francisco",
+              current: {
+                temperature: 65,
+                condition: "Partly Cloudy",
+                icon: "⛅",
+                humidity: 72,
+                windSpeed: 12
+              },
+              forecast: [
+                {
+                  day: "Tomorrow",
+                  high: 68,
+                  low: 58,
+                  condition: "Partly Cloudy",
+                  icon: "⛅"
+                },
+                {
+                  day: "Wednesday",
+                  high: 70,
+                  low: 60,
+                  condition: "Sunny",
+                  icon: "☀️"
+                },
+                {
+                  day: "Thursday",
+                  high: 72,
+                  low: 62,
+                  condition: "Clear Sky",
+                  icon: "☀️"
+                }
+              ],
+              hourly: []
+            }}
+            station={null}
+            allStations={[]}
+          />
         </div>
       )}
     </div>
