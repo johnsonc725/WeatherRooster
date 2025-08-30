@@ -15,7 +15,7 @@ if [ $? -eq 0 ]; then
     
     if [ $? -eq 0 ]; then
         echo "🎉 Deployment successful!"
-        echo "🌍 Your app should be live at: https://johnsonchen.github.io/WeatherRooster"
+        echo "🌍 Your app should be live at: https://johnsonc725.github.io/WeatherRooster"
         echo "⏰ It may take a few minutes for changes to appear."
     else
         echo "❌ Deployment failed!"
