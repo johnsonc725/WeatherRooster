@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/WeatherRooster/static/css/main.6e680f10.css",
+    "main.js": "/WeatherRooster/static/js/main.f1ba4ffe.js",
+    "static/js/488.bdcb160c.chunk.js": "/WeatherRooster/static/js/488.bdcb160c.chunk.js",
+    "index.html": "/WeatherRooster/index.html",
+    "main.6e680f10.css.map": "/WeatherRooster/static/css/main.6e680f10.css.map",
+    "main.f1ba4ffe.js.map": "/WeatherRooster/static/js/main.f1ba4ffe.js.map",
+    "488.bdcb160c.chunk.js.map": "/WeatherRooster/static/js/488.bdcb160c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6e680f10.css",
+    "static/js/main.f1ba4ffe.js"
+  ]
+}
